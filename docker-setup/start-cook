@@ -1,0 +1,12 @@
+#/bin/bash
+
+# REPLACE THIS WITH PYTHON ASAP
+
+
+MESOS_MASTER_ZK_STRING=$1
+
+cd $HOME/Cook/scheduler
+sed -i 's%MESOS_MASTER_ZK_STRING%'"\"$MESOS_MASTER_ZK_STRING\""'%g' template-cook-config.edn
+echo "Config to run:"
+cat template-cook-config.edn
+java -cp target/cook-1.0.1-SNAPSHOT-standalone.jar cook.components template-cook-config.edn
