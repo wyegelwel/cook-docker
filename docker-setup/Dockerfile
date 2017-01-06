@@ -21,8 +21,6 @@ RUN lein
 
 # Cook
 RUN git clone https://github.com/twosigma/Cook.git $HOME/Cook
-# Temporary, current bug in non-kerberized version
-RUN cd $HOME/Cook && git reset --hard 0a83b127c81fbffa049293e3b8e0f7e623ff0891 
 RUN cd $HOME/Cook/scheduler && lein uberjar
 COPY template-cook-config.edn $HOME/Cook/scheduler
 COPY start-cook $HOME/Cook/scheduler/bin/start-cook
