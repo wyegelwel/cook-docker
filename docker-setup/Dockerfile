@@ -22,8 +22,7 @@ RUN chmod a+x $HOME/bin/lein
 RUN lein
 
 # Cook
-RUN git clone https://github.com/wyegelwel/Cook.git $HOME/Cook
-#https://github.com/twosigma/Cook.git $HOME/Cook
+RUN git clone https://github.com/twosigma/Cook.git $HOME/Cook
 RUN cd $HOME/Cook/scheduler && lein uberjar
 COPY template-cook-config.edn $HOME/Cook/scheduler
 COPY start-cook $HOME/Cook/scheduler/bin/start-cook
