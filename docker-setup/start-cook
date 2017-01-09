@@ -1,7 +1,8 @@
-#/bin/bash
+#!/bin/bash
 
 # REPLACE THIS WITH PYTHON ASAP
 
+echo "yo"
 
 MESOS_MASTER_ZK_STRING=$1
 
