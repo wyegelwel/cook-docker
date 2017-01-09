@@ -1,9 +1,11 @@
-FROM mesoscloud/mesos-master:0.24.1-ubuntu-14.04
+FROM mesosphere/mesos:1.0.1-rc1
 
 RUN apt-get -y update 
 RUN apt-get -y install curl
 RUN apt-get -y install git
 
+# java setup
+RUN apt-get -y install default-jdk
 
 # Env setup
 ENV HOME "/root/"
@@ -20,9 +22,10 @@ RUN chmod a+x $HOME/bin/lein
 RUN lein
 
 # Cook
-RUN git clone https://github.com/twosigma/Cook.git $HOME/Cook
-# Temporary, current bug in non-kerberized version
-RUN cd $HOME/Cook && git reset --hard 0a83b127c81fbffa049293e3b8e0f7e623ff0891 
+RUN git clone https://github.com/wyegelwel/Cook.git $HOME/Cook
+#https://github.com/twosigma/Cook.git $HOME/Cook
 RUN cd $HOME/Cook/scheduler && lein uberjar
 COPY template-cook-config.edn $HOME/Cook/scheduler
 COPY start-cook $HOME/Cook/scheduler/bin/start-cook
+RUN apt-get install uuid-runtime
+COPY sample_launch.sh $HOME/Cook/scheduler/bin/sample_launch.sh
