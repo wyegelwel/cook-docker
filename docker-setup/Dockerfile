@@ -26,5 +26,6 @@ RUN git clone https://github.com/twosigma/Cook.git $HOME/Cook
 RUN cd $HOME/Cook/scheduler && lein uberjar
 COPY template-cook-config.edn $HOME/Cook/scheduler
 COPY start-cook $HOME/Cook/scheduler/bin/start-cook
+RUN chmod +x $HOME/Cook/scheduler/bin/start-cook
 RUN apt-get install uuid-runtime
 COPY sample_launch.sh $HOME/Cook/scheduler/bin/sample_launch.sh
